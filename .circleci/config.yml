@@ -9,6 +9,13 @@ workflows:
             branches:
               only:
                 - main
+      - deploy:
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - built
 
 jobs:
   build:
@@ -29,3 +36,12 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
+  deploy:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - run:
+          name: deploy-application
+          command: ssh -o StrictHostKeyChecking=no $EC2_ANA@$EC2_PUBLIC_DNS "RM -RF ExampleApplication/;git clone https://github.com/anaes0/example-application; source
+          ExampleApplication/deploy.sh"
+
