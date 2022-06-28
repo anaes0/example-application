@@ -15,7 +15,7 @@ workflows:
               only:
                 - main
           requires:
-            - built
+            - build
 
 jobs:
   build:
