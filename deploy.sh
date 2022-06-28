@@ -4,7 +4,7 @@ sudo apt update && sudo apt install nodejs npm
 sudo npm install -g pm2
 #stop any instance of your app
 pm2 stop example_app
-# change directory
+# change directory into folder where app is downloaded
 cd example-application/
 # install app dependencies
 npm install
