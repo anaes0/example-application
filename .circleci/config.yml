@@ -42,4 +42,4 @@ jobs:
     steps:
       - run:
           name: deploy-application
-          command: ssh -o StrictHostKeyChecking=no $EC2_ANA@$EC2_PUBLIC_DNS "rm -rf example-application/;git clone https://github.com/anaes0/example-application; source ExampleApplication/deploy.sh"
+          command: ssh -o StrictHostKeyChecking=no $EC2_ANA@$EC2_PUBLIC_DNS "rm -rf example-application/;git clone https://github.com/anaes0/example-application; source example-application/deploy.sh"
