@@ -37,18 +37,7 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: test-run
-          command: npm run test
-      - run:
-          name: docker-login
-          command: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - run:
-          name: Build Docker Image
-          command: docker build -t $IMAGE_NAME:latest .
-      - run:
-          name: Publish Docker Image
-          command: docker push $IMAGE_NAME
+
   deploy:
     docker:
       - image: circleci/node:10.16.3
@@ -56,3 +45,4 @@ jobs:
       - run:
           name: deploy-application
           command: ssh -o StrictHostKeyChecking=no $EC2_ANA@$EC2_PUBLIC_DNS " export SERVER=\"$SERVER\"; export PRIVATE_KEY=\"$PRIVATE_KEY\"; rm -rf example-application/;git clone https://github.com/anaes0/example-application; source example-application/deploy.sh"
+#
